@@ -57,13 +57,13 @@
 										<select class="custom-select" id="payroll-controller-year" placeholder="Year"></select>
 									</div>
 									<div class="col-2">
-										<input type="number" id="payroll-controller-bonus" class="form-control" placeholder="Bonus">
+										<input type="number" id="payroll-controller-bonus" class="form-control" placeholder="Bonus" min=0 max=100>
 									</div>
 								</div>
 								<br>
 								<div class="row">
 									<div class="col-2">
-										<input type="number" id="payroll-controller-no-of-clients" class="form-control" placeholder="No. of Client" value="0">
+										<input type="number" id="payroll-controller-no-of-clients" class="form-control" placeholder="No. of Client" value="0" min=0 max=100>
 									</div>
 								</div>
 							</form>

@@ -29,4 +29,5 @@ Route::get('/sales-representative/update', [App\Http\Controllers\SalesRepControl
 Route::get('/sales-representative/remove', [App\Http\Controllers\SalesRepController::class, 'remove']);
 Route::get('/sales-representative/remove', [App\Http\Controllers\SalesRepController::class, 'remove']);
 
-Route::get('/payroll', [App\Http\Controllers\PayrollController::class, 'home']);
+Route::get('/payroll', [App\Http\Controllers\PayrollController::class, 'index']);
+Route::get('/payroll/generate_payroll', [App\Http\Controllers\PayrollController::class, 'generate_payrol']);

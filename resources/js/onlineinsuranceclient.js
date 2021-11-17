@@ -79,7 +79,27 @@ payroll = {
         })
         data.clients = clients
 
-        console.log(data)
+        $.get('/payroll/generate_payroll', {
+            data: data
+        }).done(function(data) {
+            console.log(data)
+                // if (data.status) {
+                //     salesreps = data.data;
+
+            //     payroll.client_panel.find('div').remove()
+            //     payroll.control_salesreps.find('option').remove()
+
+            //     console.log(salesreps)
+
+            //     payroll.add_sales_reps('', '-- Sales Representative --')
+            //     for (var key in salesreps) {
+            //         item = salesreps[key];
+            //         payroll.add_sales_reps(item.id, item.name)
+            //     }
+            // } else {
+            //     alert('failed');
+            // }
+        })
     }
 }
 

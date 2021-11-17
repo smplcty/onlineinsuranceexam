@@ -2,31 +2,98 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payroll;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PayrollController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth');
+        //
+        return view('payroll');
     }
 
     /**
-     * Show the application dashboard.
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function create()
     {
-        if (!Auth::check()){
-            return redirect('/login');
-        }
-        return view('payroll');
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function generate_payrol(Request $request)
+    {
+        //
+        $data = $request->input('data');
+        return $request->input('data');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Payroll  $payroll
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Payroll $payroll)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Payroll  $payroll
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Payroll $payroll)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Payroll  $payroll
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Payroll $payroll)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Payroll  $payroll
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Payroll $payroll)
+    {
+        //
     }
 }
