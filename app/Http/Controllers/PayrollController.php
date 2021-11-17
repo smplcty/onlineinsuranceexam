@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Payroll;
 use Illuminate\Http\Request;
+// use Codedge\Fpdf\Fpdf\Fpdf;
+
+use PDF;
 
 class PayrollController extends Controller
 {
@@ -38,7 +41,30 @@ class PayrollController extends Controller
     {
         //
         $data = $request->input('data');
-        return $request->input('data');
+        $data = [
+            "salesreps"=>"10",
+            "month"=>"January",
+            "year"=>"2021",
+            "period"=>"1",
+            "bonus"=>"200",
+            "clients"=>[
+                ["name"=>"Mike","commission"=>"2000"],
+                ["name"=>"Lira","commission"=>"3000"],
+            ]
+        ];
+
+        // return view('pdf');
+        // return $data;
+        
+
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+
+        $pdf = PDF::loadView('pdf', $data);
+
+        return $pdf->stream('onlineinsurance-payroll.pdf');
     }
 
     /**

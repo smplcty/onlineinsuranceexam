@@ -22,12 +22,21 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/token', [App\Http\Controllers\HomeController::class, 'token']);
 Route::get('/sales-representative', [App\Http\Controllers\SalesRepController::class, 'index']);
 Route::get('/sales-representative/store', [App\Http\Controllers\SalesRepController::class, 'store']);
 Route::get('/sales-representative/show', [App\Http\Controllers\SalesRepController::class, 'show']);
 Route::get('/sales-representative/update', [App\Http\Controllers\SalesRepController::class, 'update']);
 Route::get('/sales-representative/remove', [App\Http\Controllers\SalesRepController::class, 'remove']);
-Route::get('/sales-representative/remove', [App\Http\Controllers\SalesRepController::class, 'remove']);
 
 Route::get('/payroll', [App\Http\Controllers\PayrollController::class, 'index']);
 Route::get('/payroll/generate_payroll', [App\Http\Controllers\PayrollController::class, 'generate_payrol']);
+
+// Route::get('/', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+
+//     $fpdf->AddPage();
+//     $fpdf->SetFont('Courier', 'B', 18);
+//     $fpdf->Cell(50, 25, 'Hello World!');
+//     $fpdf->Output();
+
+// });

@@ -29,4 +29,16 @@ class HomeController extends Controller
         }
         return view('home');
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function token(Request $request)
+    {
+        //
+        $token = $request->session()->token();
+        return $token;
+    }
 }

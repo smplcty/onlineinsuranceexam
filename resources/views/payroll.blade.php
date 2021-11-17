@@ -84,7 +84,8 @@
 							</form>
 							<hr>
 							<div class="text-center">
-								<button class="btn btn-lg btn-primary" id="payroll-control-create-button">Create Payroll</button>
+								<button class="btn btn-lg btn-primary d-none" id="payroll-control-create-button">Create Payroll</button>
+								<a href="/payroll/generate_payroll" class="btn btn-lg btn-primary">Create Payroll</a>
 							</div>
 						</div>
 					</div>
@@ -94,34 +95,17 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-salesrep" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modal-payroll" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 		<div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
+			<h5 class="modal-title">Payroll</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
 		<div class="modal-body">
-			<form>
-				<div class="form-group">
-					<label for="exampleInputEmail1">ID</label>
-					<input type="input" class="fi-field form-control" id="fi-id" name="id" placeholder="< Auto Generated >" value="" disabled=true>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Name</label>
-					<input type="input" class="fi-field form-control" id="fi-name" name="name" placeholder="Enter Name" value=0>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Commission</label>
-					<input type="number" class="fi-field form-control" id="fi-commission" name="commission" max=100 min=0 placeholder="Enter Commission" value=0>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Tax</label>
-					<input type="number" class="fi-field form-control" id="fi-tax" name="tax" max=100 min=0 placeholder="Enter Tax" value=0>
-				</div>
-			</form>
+			<iframe src="" frameborder="0" id="pdf-viewer" style="width: 100%; height: 500px;"></iframe>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

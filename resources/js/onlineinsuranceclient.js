@@ -3,6 +3,7 @@ window.$ = window.jQuery = require('jquery');
 payroll = {}
 
 payroll = {
+    token: null,
     client_panel: $('#section-clients'),
     control_salesreps: $('#payroll-controller-salesrep'),
     control_month: $('#payroll-controller-month'),
@@ -27,6 +28,12 @@ payroll = {
             } else {
                 alert('failed');
             }
+        })
+    },
+    request_token: function() {
+        $.get('/token', {}).done(function(data) {
+            payroll.token = data;
+            console.log(data)
         })
     },
     add_sales_reps: function(id, name) {
@@ -79,12 +86,52 @@ payroll = {
         })
         data.clients = clients
 
+        // $.ajax({
+        //     url: '/payroll/generate_payroll',
+        //     type: 'post',
+        //     data: {
+        //         data: data
+        //     },
+        //     headers: {
+        //         '_token': $('meta[name=csrf-token]').attr('content')
+        //     },
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         console.info(data);
+        //     }
+        // });
+
         $.get('/payroll/generate_payroll', {
-            data: data
+            '_token': $('meta[name=csrf-token]').attr('content'),
+            data: data,
         }).done(function(data) {
+            $('#modal-payroll').modal('show');
+
             console.log(data)
-                // if (data.status) {
-                //     salesreps = data.data;
+
+            // //Convert the Byte Data to BLOB object.
+            // var blob = new Blob([data], { type: "application/octetstream" });
+
+            // fileName = 'onlineinsurance.pdf'
+
+            // //Check the Browser type and download the File.
+            // var isIE = false || !!document.documentMode;
+            // if (isIE) {
+            //     window.navigator.msSaveBlob(blob, fileName);
+            // } else {
+            //     var url = window.URL || window.webkitURL;
+            //     link = url.createObjectURL(blob);
+            //     var a = $("<a />");
+            //     a.attr("download", fileName);
+            //     a.attr("href", link);
+            //     $("body").append(a);
+            //     a[0].click();
+            //     $("body").remove(a);
+            // }
+
+            // console.log(data)
+            // if (data.status) {
+            //     salesreps = data.data;
 
             //     payroll.client_panel.find('div').remove()
             //     payroll.control_salesreps.find('option').remove()
@@ -105,6 +152,7 @@ payroll = {
 
 
 $(document).ready(function() {
+    payroll.request_token();
     payroll.load_sales_rep();
     payroll.generate_year();
 
