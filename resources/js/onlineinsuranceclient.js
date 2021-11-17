@@ -68,7 +68,7 @@ payroll = {
     },
     create_payroll: function() {
         data = {}
-        data.salesreps = payroll.control_salesreps.val()
+        data.id = payroll.control_salesreps.val()
         data.month = payroll.control_month.val()
         data.year = payroll.control_year.val()
         data.period = payroll.control_period.val()
@@ -101,53 +101,66 @@ payroll = {
         //     }
         // });
 
-        $.get('/payroll/generate_payroll', {
-            '_token': $('meta[name=csrf-token]').attr('content'),
-            data: data,
-        }).done(function(data) {
-            $('#modal-payroll').modal('show');
+        payroll_generation_url = '/payroll/generate_payroll';
+        // data = { 'first name': 'George', 'last name': 'Jetson', 'age': 110 };
+        querystring = encodeQueryData({ jsonquery: JSON.stringify(data) });
+        console.log(payroll_generation_url + "?" + querystring)
+        window.open(payroll_generation_url + "?" + querystring);
 
-            console.log(data)
+        // $.get('/payroll/generate_payroll', {
+        //     '_token': $('meta[name=csrf-token]').attr('content'),
+        //     data: data,
+        // }).done(function(data) {
+        //     $('#modal-payroll').modal('show');
 
-            // //Convert the Byte Data to BLOB object.
-            // var blob = new Blob([data], { type: "application/octetstream" });
+        //     console.log(data)
 
-            // fileName = 'onlineinsurance.pdf'
+        //     // //Convert the Byte Data to BLOB object.
+        //     // var blob = new Blob([data], { type: "application/octetstream" });
 
-            // //Check the Browser type and download the File.
-            // var isIE = false || !!document.documentMode;
-            // if (isIE) {
-            //     window.navigator.msSaveBlob(blob, fileName);
-            // } else {
-            //     var url = window.URL || window.webkitURL;
-            //     link = url.createObjectURL(blob);
-            //     var a = $("<a />");
-            //     a.attr("download", fileName);
-            //     a.attr("href", link);
-            //     $("body").append(a);
-            //     a[0].click();
-            //     $("body").remove(a);
-            // }
+        //     // fileName = 'onlineinsurance.pdf'
 
-            // console.log(data)
-            // if (data.status) {
-            //     salesreps = data.data;
+        //     // //Check the Browser type and download the File.
+        //     // var isIE = false || !!document.documentMode;
+        //     // if (isIE) {
+        //     //     window.navigator.msSaveBlob(blob, fileName);
+        //     // } else {
+        //     //     var url = window.URL || window.webkitURL;
+        //     //     link = url.createObjectURL(blob);
+        //     //     var a = $("<a />");
+        //     //     a.attr("download", fileName);
+        //     //     a.attr("href", link);
+        //     //     $("body").append(a);
+        //     //     a[0].click();
+        //     //     $("body").remove(a);
+        //     // }
 
-            //     payroll.client_panel.find('div').remove()
-            //     payroll.control_salesreps.find('option').remove()
+        //     // console.log(data)
+        //     // if (data.status) {
+        //     //     salesreps = data.data;
 
-            //     console.log(salesreps)
+        //     //     payroll.client_panel.find('div').remove()
+        //     //     payroll.control_salesreps.find('option').remove()
 
-            //     payroll.add_sales_reps('', '-- Sales Representative --')
-            //     for (var key in salesreps) {
-            //         item = salesreps[key];
-            //         payroll.add_sales_reps(item.id, item.name)
-            //     }
-            // } else {
-            //     alert('failed');
-            // }
-        })
+        //     //     console.log(salesreps)
+
+        //     //     payroll.add_sales_reps('', '-- Sales Representative --')
+        //     //     for (var key in salesreps) {
+        //     //         item = salesreps[key];
+        //     //         payroll.add_sales_reps(item.id, item.name)
+        //     //     }
+        //     // } else {
+        //     //     alert('failed');
+        //     // }
+        // })
     }
+}
+
+function encodeQueryData(data) {
+    const ret = [];
+    for (let d in data)
+        ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+    return ret.join('&');
 }
 
 

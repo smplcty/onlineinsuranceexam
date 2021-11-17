@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payroll;
+use App\Models\SalesRep;
 use Illuminate\Http\Request;
 // use Codedge\Fpdf\Fpdf\Fpdf;
 
@@ -40,29 +41,42 @@ class PayrollController extends Controller
     public function generate_payrol(Request $request)
     {
         //
-        $data = $request->input('data');
-        $data = [
-            "salesreps"=>"10",
-            "month"=>"January",
-            "year"=>"2021",
-            "period"=>"1",
-            "bonus"=>"200",
-            "clients"=>[
-                ["name"=>"Mike","commission"=>"2000"],
-                ["name"=>"Lira","commission"=>"3000"],
-            ]
-        ];
+        $data = json_decode($request->input('jsonquery'), true);
+        $currency = '$';
+
+        $pdf_data = [];
+        $pdf_data['sr_info'] = SalesRep::where('id', $data['id'])->get()[0];
+        $pdf_data['clients'] = [];
+
+        $current_date = date('d-m-Y');
+        $total = 0;
+
+        foreach($data['clients'] as $k => $v){
+            $v['date'] = $current_date;
+            $v['description'] = "Commission from client: {$v['name']}";
+            $commission_formatted = number_format($v['commission'], 2, '.', ',');
+            $v['commission_formatted'] = "{$currency} {$commission_formatted}";
+            $total = $total + $v['commission'];
+
+
+            $pdf_data['clients'][] = $v;
+        }
+        
+        $pdf_data['total'] = $total;
+        $total_formatted = number_format($total, 2, '.', ',');
+        $pdf_data['total_formatted'] = "{$currency} {$total_formatted}";
+
 
         // return view('pdf');
-        // return $data;
+        // return $pdf_data;
         
 
-        $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y')
-        ];
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
 
-        $pdf = PDF::loadView('pdf', $data);
+        $pdf = PDF::loadView('pdf', $pdf_data);
 
         return $pdf->stream('onlineinsurance-payroll.pdf');
     }

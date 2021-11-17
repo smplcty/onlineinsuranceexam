@@ -84,8 +84,8 @@
 							</form>
 							<hr>
 							<div class="text-center">
-								<button class="btn btn-lg btn-primary d-none" id="payroll-control-create-button">Create Payroll</button>
-								<a href="/payroll/generate_payroll" class="btn btn-lg btn-primary">Create Payroll</a>
+								<button class="btn btn-lg btn-primary" id="payroll-control-create-button">Create Payroll</button>
+								<a href="/payroll/generate_payroll" class="btn btn-lg btn-primary d-none">Create Payroll</a>
 							</div>
 						</div>
 					</div>
